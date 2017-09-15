@@ -69,9 +69,8 @@ export const createGroupMeetup = async (req, res) => {
 
 
     try {
-        //group: await newGroup.save()
         const [meetup, group] = await Group.addMeetup(groupId, { title, description });
-        //console.log(result);
+
         return res.status(201).json({
             meetup,
             group
