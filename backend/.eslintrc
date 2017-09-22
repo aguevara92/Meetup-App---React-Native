@@ -1,3 +1,9 @@
 {
-    "estends": "equimper"
+    "extends": "equimper",
+    "rules": {
+        "indent": [
+          2,
+          4
+        ]
+    }
 }
