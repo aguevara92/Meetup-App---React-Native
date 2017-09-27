@@ -4,6 +4,8 @@
         "indent": [
           2,
           4
-        ]
+        ],
+        "comma-dangle": ["error", "never"],
+        "react/jsx-indent-props": [false, 4]
     }
 }

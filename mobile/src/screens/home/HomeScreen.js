@@ -1,20 +1,35 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 import { MeetupApi } from '../../../constants/api';
-import styles from './styles/HomeScreen';
 import { LoadingScreen } from '../../commons';
 import { MyMeetupList } from './components/';
+import Colors from '../../../constants/Colors';
+import styles from './styles/HomeScreen';
 
 const meetupApi = new MeetupApi();
 
 class HomeScreen extends Component {
     static defaultProps = {
-        meetupApi,
+        meetupApi
+    }
+
+    static navigationOptions = {
+        headerStyle: {
+            backgroundColor: Colors.redColor,
+        },
+        tabBarIcon: ({ tintColor }) => (
+            <FontAwesome
+                name="home"
+                size={25}
+                color={tintColor}
+            />
+        )
     }
 
     state = {
         loading: false,
-        meetups: [],
+        meetups: []
     }
 
     async componentDidMount() {

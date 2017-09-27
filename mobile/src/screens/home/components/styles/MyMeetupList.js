@@ -24,7 +24,7 @@ const styles = EStyleSheet.create({
     },
     meetupCardInner: {
         flex: 1,
-        backgroundColor: '#f73859',
+        backgroundColor: '$redColor',
     },
     meetupCardTopContainer: {
         flex: 1,
