@@ -1,5 +1,10 @@
 {
+  "name": "mobile",
+  "displayName": "mobile",
   "expo": {
-    "sdkVersion": "20.0.0"
+    "name": "mobile",
+    "slug": "mobile",
+    "sdkVersion": "21.0.0",
+    "privacy": "public"
   }
 }

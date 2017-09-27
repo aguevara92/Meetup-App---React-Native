@@ -1,56 +1,42 @@
 import React from 'react';
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
-import { fetchMeetups } from './constants/api'
+import EStyleSheet from 'react-native-extended-stylesheet';
+import Colors from './constants/Colors';
+import { HomeScreen } from './src/screens';
+import { cachedFonts } from './helpers';
+import { LoadingScreen } from './src/commons';
+
+EStyleSheet.build(Colors);
 
 export default class App extends React.Component {
-    
-    static defaultProps = {
-        fetchMeetups
-    }
-
     state = {
-        loading: false,
-        meetups: []
+        fontLoaded: false,
     }
 
-
-    async componentWillMount () {
-        this.setState({ loading:true });
-        let data = await this.props.fetchMeetups();
-
-        this.setState({ loading: false, meetups: data.meetups });
+    componentDidMount() {
+        this._loadAssetsAsync();
     }
-     
-    
-    render() { 
-        if (this.state.loading){
-            console.log('is loading');
-            return (
-                <View style={styles.container}>
-                    <ActivityIndicator size="large"/>
-                </View>
-            )
-        } 
-            
-        return (
-            <View style={styles.container}>
-            
-            {this.state.meetups.map((meetup, i) => (
-                <Text key = {i}>{meetup.title}</Text>
-            ))}
 
-            
-            </View>
-        );        
+    async _loadAssetsAsync() {
+        const fontAssets = cachedFonts([
+            {
+                lato: require('./assets/fonts/Lato-Regular.ttf'),
+            },
+            {
+                latoBold: require('./assets/fonts/Lato-Bold.ttf'),
+            },
+            {
+                latoLight: require('./assets/fonts/Lato-Light.ttf'),
+            },
+        ]);
+        await Promise.all(fontAssets);
+
+        this.setState({ fontLoaded: true });
+    }
+
+    render() {
+        if (!this.state.fontLoaded) {
+            return <LoadingScreen />;
+        }
+        return <HomeScreen />;
     }
 }
-
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: '#fff',
-            alignItems: 'center',
-            justifyContent: 'center',
-        },
-    }
-);
